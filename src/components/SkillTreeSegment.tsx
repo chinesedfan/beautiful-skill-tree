@@ -79,6 +79,7 @@ function SkillTreeSegment({
           state={nodeState}
           childNodeRef={skillNodeRef}
           parentPosition={parentPosition}
+          extraGapLevel={skill.extraLevelGap}
         />
       )}
       <div ref={skillNodeRef}>

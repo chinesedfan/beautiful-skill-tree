@@ -8,6 +8,7 @@ export interface AngledLineProps {
 
 export interface AngledLineVerticalProps {
   direction: Direction;
+  extraGapLevel: number;
 }
 
 export interface AngledLineHoriztonalProps {

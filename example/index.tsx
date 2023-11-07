@@ -90,7 +90,7 @@ const App = () => {
                 <FilterInput handleFilter={handleFilter} />
               </nav>
               <div>
-                <SkillTree
+                {/* <SkillTree
                   closedByDefault
                   treeId="sp"
                   handleNodeSelect={handleNodeSelect}
@@ -122,7 +122,7 @@ const App = () => {
                   data={legsPullData}
                   savedData={hpSavedData}
                   handleSave={handleSave}
-                />
+                /> */}
                 <SkillTree
                   treeId="web"
                   handleNodeSelect={handleNodeSelect}
@@ -130,10 +130,10 @@ const App = () => {
                   data={webDevData}
                   handleSave={handleSave}
                 />
-                <DisabledSkillTree
+                {/* <DisabledSkillTree
                   handleNodeSelect={handleNodeSelect}
                   handleSave={handleSave}
-                />
+                /> */}
               </div>
             </React.Fragment>
           );

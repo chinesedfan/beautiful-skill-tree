@@ -11,10 +11,11 @@ const css: BaseThemedCssFunction<SkillTheme> = require('styled-components').css;
 interface Props {
   direction: Direction;
   state: NodeState;
+  extraGapLevel: number;
 }
 
 function LowerAngledLine(props: Props) {
-  const { state, direction } = props;
+  const { state, direction, extraGapLevel } = props;
 
   return (
     <AngledLineVerticalBottom
@@ -22,6 +23,7 @@ function LowerAngledLine(props: Props) {
       direction={direction}
       data-testid="lower-angled-line"
       selected={state === SELECTED_STATE}
+      extraGapLevel={extraGapLevel}
     />
   );
 }
@@ -35,7 +37,10 @@ const AngledLineVerticalBottom = styled(StyledAngledLine)<
   transform-origin: 0 0;
   left: 50%;
   top: 24px;
-  width: 31px;
+  ${({ extraGapLevel }) =>
+    css`
+      width: ${31 + (56 + 36) * extraGapLevel}px;
+    `}
 
   ${props =>
     props.direction === 'right' &&

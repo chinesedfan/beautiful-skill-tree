@@ -12,6 +12,7 @@ export interface Props {
   childNodeRef: React.MutableRefObject<Nullable<HTMLDivElement>>;
   state: NodeState;
   parentPosition: number;
+  extraGapLevel?: number;
 }
 
 function SkillEdge(props: Props) {
@@ -20,9 +21,11 @@ function SkillEdge(props: Props) {
     state,
     childNodeRef,
     parentPosition,
+    extraGapLevel = 0,
   } = props;
 
-  if (!parentHasMultipleChildren) return <Line state={state} />;
+  if (!parentHasMultipleChildren)
+    return <Line state={state} extraGapLevel={extraGapLevel} />;
 
   const [childPosition, setChildPosition] = useState(0);
   const direction = parentPosition < childPosition ? 'right' : 'left';
@@ -47,7 +50,7 @@ function SkillEdge(props: Props) {
   }, []);
 
   return (
-    <div style={{ height: '56px' }}>
+    <div style={{ height: 56 + (56 + 36) * extraGapLevel + 'px' }}>
       <UpperAngledLine state={state} direction={direction} />
       <div style={{ position: 'relative' }}>
         <MiddleAngledLine
@@ -56,7 +59,11 @@ function SkillEdge(props: Props) {
           state={state}
           direction={direction}
         />
-        <LowerAngledLine direction={direction} state={state} />
+        <LowerAngledLine
+          direction={direction}
+          state={state}
+          extraGapLevel={extraGapLevel}
+        />
       </div>
     </div>
   );

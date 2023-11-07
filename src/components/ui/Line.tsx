@@ -7,6 +7,10 @@ import { SkillTheme } from '../../theme';
 const keyframes = require('styled-components').keyframes;
 const css: BaseThemedCssFunction<SkillTheme> = require('styled-components').css;
 
+interface GapProps {
+  extraGapLevel: number;
+}
+
 interface LineProps {
   state: NodeState;
 }
@@ -16,13 +20,14 @@ interface StyledLineProps {
   unlocked: boolean;
 }
 
-function Line({ state }: LineProps) {
+function Line({ state, extraGapLevel }: LineProps & GapProps) {
   return (
-    <LineContainer>
+    <LineContainer extraGapLevel={extraGapLevel}>
       <StyledLine
         data-testid="straight-line"
         selected={state === SELECTED_STATE}
         unlocked={state !== LOCKED_STATE}
+        extraGapLevel={extraGapLevel}
       />
     </LineContainer>
   );
@@ -30,8 +35,8 @@ function Line({ state }: LineProps) {
 
 export default Line;
 
-const LineContainer = styled.div`
-  height: 56px;
+const LineContainer = styled.div<GapProps>`
+  ${({ extraGapLevel }) => `height: ${56 + extraGapLevel * (56 + 36)}px;`}
   left: 4px;
   margin: 0 auto;
   position: relative;
@@ -49,7 +54,7 @@ const slidedown = keyframes`
   }
 `;
 
-const StyledLine = styled.div<StyledLineProps>`
+const StyledLine = styled.div<StyledLineProps & GapProps>`
   background: linear-gradient(
     to right,
     rgba(255, 255, 255, 1) 0%,
@@ -65,7 +70,10 @@ const StyledLine = styled.div<StyledLineProps>`
   transform: rotate(90deg);
   transform-origin: 0 0;
   transition: opacity 0.6s;
-  width: 56px;
+  ${({ extraGapLevel }) =>
+    css`
+      width: ${54 + extraGapLevel * (56 + 36)}px;
+    `}
 
   ${props =>
     props.selected &&

@@ -50,6 +50,7 @@ interface BaseSkill {
   title: string;
   tooltip: Tooltip;
   children: Skill[];
+  extraLevelGap?: number;
 }
 
 interface MajorSkill extends BaseSkill {

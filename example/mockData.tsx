@@ -281,7 +281,31 @@ export const pushUpData: SkillType[] = [
   },
 ];
 
-export const webDevData = [
+function createSkill(title, ...children): SkillType {
+  return {
+    id: title,
+    title,
+    tooltip: {
+      content: title,
+    },
+    children,
+  };
+}
+function createSkillWithGap(title, gap) {
+  const skill = createSkill(title);
+  skill.extraLevelGap = gap;
+  return skill;
+}
+
+export const webDevData: SkillType[] = [
+  createSkill(
+    'cp',
+    createSkillWithGap('List', 2),
+    createSkill('Queue', createSkillWithGap('BFS', 1)),
+    createSkill('Stack', createSkill('DFS', createSkill('LCA')))
+  ),
+];
+export const webDevData2 = [
   {
     id: 'Computer Science',
     title: 'Computer Science',
